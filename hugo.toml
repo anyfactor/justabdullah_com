@@ -85,6 +85,12 @@ copyright = "© {years} Abdullah. All rights reserved."
     location = "St John's, Newfoundland and Labrador"
     bio = "I'm a PhD Researcher at Memorial University of Newfoundland. I live in St John's, Newfoundland and Labrador. I study synthetic data, information systems, and human-centred AI."
 
+  # -- Site-wide announcement banner --
+  [params.banner]
+    enabled = true
+    html = "📣 New here? Read the <strong>welcome post</strong> to see what this site is about."
+    url = "/blog/welcome-to-just-abdullah/"
+
   # -- Analytics (optional) --
   plausibleDomain = ""
 

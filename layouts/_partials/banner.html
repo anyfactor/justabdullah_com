@@ -1,0 +1,13 @@
+{{ with .Site.Params.banner }}
+{{ if .enabled }}
+{{ if .url }}
+<a class="site-banner" href="{{ .url | relURL }}">
+  <span class="site-banner-text">{{ .html | safeHTML }}</span>
+</a>
+{{ else }}
+<div class="site-banner">
+  <span class="site-banner-text">{{ .html | safeHTML }}</span>
+</div>
+{{ end }}
+{{ end }}
+{{ end }}

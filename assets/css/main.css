@@ -64,6 +64,23 @@ a:hover { text-decoration: underline; }
   gap: 1rem;
   flex-wrap: wrap;
 }
+
+/* Announcement banner */
+.site-banner {
+  display: block;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  text-align: center;
+  text-decoration: none;
+}
+a.site-banner:hover { text-decoration: underline; }
+.site-banner-text {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .brand {
   font-weight: 700;
   font-size: 1.05rem;
