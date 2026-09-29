@@ -1,0 +1,118 @@
+{{- $description := .Description -}}
+{{- if not $description -}}{{ $description = .Summary }}{{- end -}}
+{{- if not $description -}}{{ $description = .Site.Params.description }}{{- end -}}
+{{- $description = $description | plainify | htmlUnescape -}}
+
+{{- $title := .Title -}}
+{{- if .IsHome -}}
+  {{- $title = printf "%s — %s" .Site.Title .Site.Params.profile.tagline -}}
+{{- else -}}
+  {{- $title = printf "%s | %s" .Title .Site.Title -}}
+{{- end -}}
+
+{{- $images := .Params.images -}}
+{{- if not $images -}}{{ $images = .Site.Params.images }}{{- end -}}
+{{- $image := "" -}}
+{{- if $images -}}{{ $image = index $images 0 | absURL }}{{- end -}}
+
+{{- $isPost := and (eq .Kind "page") (eq .Section "posts") -}}
+{{- $keywords := .Params.tags -}}
+{{- if not $keywords -}}{{ $keywords = .Site.Params.keywords }}{{- end -}}
+
+<meta name="description" content="{{ $description }}">
+{{- with $keywords }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- end }}
+<meta name="author" content="{{ .Site.Params.author }}">
+{{- if or .Params.noindex .Draft }}
+<meta name="robots" content="noindex, nofollow">
+{{- else }}
+<meta name="robots" content="index, follow">
+{{- end }}
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ if $isPost }}article{{ else }}website{{ end }}">
+{{- with $image }}
+<meta property="og:image" content="{{ . }}">
+<meta property="og:image:alt" content="{{ $title }}">
+{{- end }}
+<meta property="og:locale" content="en_US">
+{{- if $isPost }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- if .Lastmod }}
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- end }}
+<meta property="article:author" content="{{ .Site.Params.author }}">
+{{- range .Params.categories }}
+<meta property="article:section" content="{{ . }}">
+{{- end }}
+{{- range .Params.tags }}
+<meta property="article:tag" content="{{ . }}">
+{{- end }}
+{{- end }}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{- with $image }}
+<meta name="twitter:image" content="{{ . }}">
+{{- end }}
+{{- with .Site.Params.authorTwitter }}
+<meta name="twitter:site" content="@{{ . }}">
+<meta name="twitter:creator" content="@{{ . }}">
+{{- end }}
+
+<!-- JSON-LD structured data -->
+<script type="application/ld+json">
+{{- if .IsHome }}
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ .Site.Title | jsonify }},
+  "url": {{ .Site.BaseURL | jsonify }},
+  "description": {{ $description | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ .Site.Params.profile.name | jsonify }},
+    "jobTitle": {{ .Site.Params.profile.tagline | jsonify }},
+    "url": {{ .Site.BaseURL | jsonify }}
+  }
+}
+{{- else if $isPost }}
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ $description | jsonify }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "dateModified": {{ (.Lastmod | default .Date).Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "url": {{ .Permalink | jsonify }},
+  "mainEntityOfPage": {{ .Permalink | jsonify }},
+  {{- if $image }}
+  "image": {{ $image | jsonify }},
+  {{- end }}
+  "author": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author | jsonify }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author | jsonify }}
+  },
+  "keywords": {{ delimit (.Params.tags | default slice) ", " | jsonify }}
+}
+{{- else }}
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ .Title | jsonify }},
+  "description": {{ $description | jsonify }},
+  "url": {{ .Permalink | jsonify }}
+}
+{{- end }}
+</script>

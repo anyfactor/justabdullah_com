@@ -1,0 +1,95 @@
+baseURL = "https://justabdullah.com/"
+locale = "en-us"
+title = "justAbdullah.com"
+enableRobotsTXT = true
+enableEmoji = true
+rssLimit = 20
+paginate = 8
+summarylength = 40
+
+copyright = "© {years} Abdullah. All rights reserved."
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "monokai"
+    lineNos = false
+    noClasses = false
+    codeFences = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+
+[permalinks]
+  posts = "/blog/:filename/"
+
+[minify]
+  minifyOutput = true
+
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    disable = false
+    respectDoNotTrack = true
+  [privacy.x]
+    disable = false
+  [privacy.youtube]
+    privacyEnhanced = true
+
+[services]
+  [services.googleAnalytics]
+    ID = ""
+  [services.x]
+    disableInlineCSS = false
+
+[params]
+  # -- Core site metadata used across SEO tags --
+  description = "I'm a PhD Researcher at Memorial University of Newfoundland. I write about synthetic data, information systems, design science, and explainable AI."
+  keywords = ["Abdullah", "Synthetic Data", "Information Systems", "Design Science", "HCI", "Explainable AI", "Data Management", "PhD Research", "Memorial University of Newfoundland"]
+  author = "Abdullah"
+  authorTwitter = ""
+  images = ["images/og-default.svg"]
+
+  # -- Social / profile links, fill in real URLs --
+  [params.social]
+    github = "https://github.com/"
+    linkedin = "https://www.linkedin.com/"
+    googleScholar = ""
+    orcid = ""
+    email = "hello@justabdullah.com"
+
+  # -- Landing page / bio content --
+  [params.profile]
+    name = "Abdullah"
+    tagline = "PhD Researcher · Memorial University of Newfoundland"
+    location = "St John's, Newfoundland and Labrador"
+    bio = "I'm a PhD Researcher at Memorial University of Newfoundland. I live in St John's, Newfoundland and Labrador. I study synthetic data, information systems, and human-centred AI."
+
+  # -- Analytics (optional) --
+  plausibleDomain = ""
+
+  # -- Comments (optional, disabled by default) --
+  giscusRepo = ""
+
+  # -- JSON-LD / SEO defaults --
+  schemaType = "Person"

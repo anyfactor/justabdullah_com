@@ -1,0 +1,9 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>{{ (printf "© %s %s. All rights reserved." (now.Format "2006") .Site.Params.profile.name) }}</p>
+    <div class="footer-contact">
+      <a href="{{ "/about/" | relURL }}">About/Contact</a>
+      <img src="{{ "images/abdullah-email.png" | relURL }}" alt="Email address, shown as an image to avoid spam" class="email-image">
+    </div>
+  </div>
+</footer>

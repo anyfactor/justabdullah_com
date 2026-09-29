@@ -1,0 +1,40 @@
+{{ define "main" }}
+{{ $profile := .Site.Params.profile }}
+<section class="hero container">
+  <p class="eyebrow">{{ $profile.tagline }}</p>
+  <h1>Hi, I'm {{ $profile.name }}. <span class="dot">I write about synthetic data, information systems, and human-centred AI.</span></h1>
+  <p class="hero-lede">{{ $profile.bio }}</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ "/blog/" | relURL }}">Read the blog</a>
+    <a class="btn btn-ghost" href="{{ "/about/" | relURL }}">About me</a>
+  </div>
+</section>
+
+<section class="container interests">
+  <h2>Research interests</h2>
+  <ul class="pill-list">
+    <li>Synthetic Data &amp; LLM-generated Data</li>
+    <li>Information Systems</li>
+    <li>Design Science</li>
+    <li>Conceptual Frameworks</li>
+    <li>HCI (Human-Computer Interaction)</li>
+    <li>Explainable AI</li>
+    <li>Data Management</li>
+  </ul>
+</section>
+
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ with $posts }}
+<section class="container latest-posts">
+  <div class="section-heading">
+    <h2>Latest writing</h2>
+    <a href="{{ "/blog/" | relURL }}">View all →</a>
+  </div>
+  <div class="post-grid">
+    {{ range first 3 . }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+{{ end }}

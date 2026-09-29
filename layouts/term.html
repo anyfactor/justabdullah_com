@@ -1,0 +1,16 @@
+{{ define "main" }}
+<section class="container list-page">
+  <header class="page-header">
+    <p class="eyebrow">{{ .Data.Singular | title }}</p>
+    <h1>{{ .Title }}</h1>
+  </header>
+  <div class="post-grid">
+    {{ range .Paginator.Pages }}
+      {{ partial "post-card.html" . }}
+    {{ else }}
+      <p>No posts in this {{ .Data.Singular }} yet.</p>
+    {{ end }}
+  </div>
+  {{ template "_internal/pagination.html" . }}
+</section>
+{{ end }}
