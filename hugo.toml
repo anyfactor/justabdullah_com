@@ -4,10 +4,12 @@ title = "justAbdullah.com"
 enableRobotsTXT = true
 enableEmoji = true
 rssLimit = 20
-paginate = 8
 summarylength = 40
 
 copyright = "© {years} Abdullah. All rights reserved."
+
+[pagination]
+  pagerSize = 8
 
 [taxonomies]
   category = "categories"
@@ -39,7 +41,7 @@ copyright = "© {years} Abdullah. All rights reserved."
     endLevel = 4
 
 [permalinks]
-  posts = "/blog/:filename/"
+  posts = "/blog/:contentbasename/"
 
 [minify]
   minifyOutput = true
