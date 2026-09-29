@@ -125,13 +125,15 @@ Before going live, update in `hugo.toml`:
 
 ## Deploying to Cloudflare Pages
 
-This repo is private, so connect it via the Cloudflare dashboard (Workers & Pages → Create → Pages → Connect to Git) rather than a public webhook:
+This repo is private, so connect it via the Cloudflare dashboard (Workers & Pages → Create → **Pages** (classic) → Connect to Git) rather than a public webhook. Use classic Pages, not the newer unified Workers/"Static" project type — the latter auto-generates a `wrangler.jsonc` and runs an extra `npx wrangler deploy` step that re-invokes the build command via `npx hugo`, which fails because `hugo` isn't an npm package.
 
 | Setting | Value |
 |---|---|
 | Build command | `hugo --minify` |
 | Build output directory | `public` |
 | Environment variable | `HUGO_VERSION=0.166.0` |
+
+Make sure `HUGO_VERSION` is actually set in the dashboard — without it, Cloudflare's build image may fall back to an older Hugo version with different (or removed) config keys than the one used locally.
 
 `static/_headers` is copied into `public/` automatically and sets security headers (CSP, HSTS, X-Frame-Options, etc.) plus long-lived caching for `css/` and `images/`.
 
