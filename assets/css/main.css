@@ -223,7 +223,7 @@ a.site-banner:hover { text-decoration: underline; }
 
 .prose { padding-bottom: 2rem; }
 .prose h2 { margin-top: 2rem; }
-.prose p, .prose ul, .prose ol { max-width: 68ch; }
+.prose p, .prose ul, .prose ol { max-width: 100%; }
 .prose pre {
   background: #1e1f26;
   color: #e9ebf0;
@@ -244,6 +244,24 @@ a.site-banner:hover { text-decoration: underline; }
   margin: 1.5rem 0;
   padding: 0.25rem 1rem;
   color: var(--color-text-muted);
+}
+.prose table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(26, 29, 35, 0.08);
+}
+.prose th,
+.prose td {
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(26, 29, 35, 0.08);
+  text-align: left;
+  vertical-align: top;
+}
+.prose thead th {
+  background: var(--color-bg-alt);
+  font-weight: 600;
 }
 .prose img { max-width: 100%; border-radius: var(--radius); }
 
